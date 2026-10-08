@@ -2,138 +2,138 @@
 <html lang="ru">
 <head>
     <meta charset="utf-8">
-    <title>Мой космический мостик</title>
+    <title>Космический мостик</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
             min-height: 100vh;
-            
-            /* 1. Фон: только картинка, БЕЗ затемнения фона */
+            /* ВОТ ЗДЕСЬ ВОЗВРАЩАЕМ КОСМОС */
             background-image: url('space.jpg'); 
-            background-size: cover; /* Картинка заполнит весь экран */
+            /* Если картинки space.jpg нет, сработает этот цвет */
+            background-color: #0f172a; 
+            background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
             background-attachment: fixed;
             
-            color: #fff;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* 2. ГЛАВНОЕ ИСПРАВЛЕНИЕ: Контейнер-подложка */
-        /* Это тот самый "матовый" блок, который спасёт текст от прозрачности */
-        .content-wrapper {
-            background: rgba(20, 20, 30, 0.85); /* Тёмно-серая полупрозрачная подложка */
-            backdrop-filter: blur(10px); /* Эффект матового стекла */
+        /* Тёмная карточка (как на фото) */
+        .card {
+            background-color: rgba(30, 30, 40, 0.95); /* Почти непрозрачный тёмный фон */
+            backdrop-filter: blur(10px); /* Эффект матового стекла поверх космоса */
+            width: 100%;
+            max-width: 500px;
             padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            max-width: 600px;
-            width: 90%;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #dcdcdc;
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
         h1 {
             color: #ffffff;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
-            margin-bottom: 20px;
-            font-size: 2.5rem;
+            font-size: 2rem;
             text-transform: uppercase;
             letter-spacing: 3px;
+            margin-bottom: 25px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
         }
 
-        /* Текст мечты: теперь он жирный и контрастный */
-        .dream-text {
-            color: #e0e0e0;
-            font-size: 1.1rem;
+        .text-block {
             line-height: 1.6;
             margin-bottom: 30px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.7);
+            font-size: 0.95rem;
+            color: #e0e0e0;
         }
 
-        .dream-text strong {
-            color: #fff; /* Акценты делаем белыми */
-            font-weight: 700;
+        .text-block strong {
+            color: #ffffff;
         }
 
-        /* Таймер: крупный, яркий, красный */
-        .timer-wrapper {
-            text-align: center;
-            margin: 30px 0;
+        /* Блок с таймером */
+        .timer-block {
+            margin: 40px 0;
         }
 
         .timer-label {
-            font-size: 1.2rem;
-            color: #aaa;
-            margin-bottom: 10px;
+            color: #888;
+            font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: block;
         }
 
-        #days-count {
-            font-size: 5rem; /* Огромная цифра */
-            font-weight: 800;
-            color: #FF4757; /* Твой фирменный красный */
-            display: block;
-            line-height: 1;
-            text-shadow: 0 0 20px rgba(255, 71, 87, 0.8);
-            margin: 0;
+        /* Красный круг для цифры */
+        .timer-circle {
+            width: 120px;
+            height: 120px;
+            background-color: #ff4757;
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            box-shadow: 0 0 25px rgba(255, 71, 87, 0.6);
+            font-size: 3rem;
+            font-weight: bold;
+            border: 4px solid rgba(255,255,255,0.1);
         }
 
         .timer-unit {
-            font-size: 1.5rem;
-            color: #fff;
+            color: #ffffff;
+            font-size: 1rem;
+            margin-top: 10px;
+            text-transform: uppercase;
             font-weight: 300;
         }
 
-        /* Кнопка: стиль "космический мостик" */
-        .bridge-btn {
+        /* Кнопка */
+        .btn {
             display: inline-block;
             background-color: transparent;
+            border: 1px solid #4fc3f7;
             color: #4fc3f7;
-            border: 2px solid #4fc3f7;
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            font-weight: bold;
+            padding: 12px 30px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            font-weight: bold;
             text-decoration: none;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-            box-shadow: 0 0 15px rgba(79, 195, 247, 0.2);
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(79, 195, 247, 0.2);
         }
 
-        .bridge-btn:hover {
+        .btn:hover {
             background-color: #4fc3f7;
             color: #000;
-            transform: translateY(-5px);
-            box-shadow: 0 0 30px rgba(79, 195, 247, 0.8);
+            box-shadow: 0 0 25px rgba(79, 195, 247, 0.8);
+            transform: translateY(-3px);
         }
 
-        /* Фраза под кнопкой: теперь она ЯРКО-КРАСНАЯ, как ты хотела */
-        .subtitle {
-            color: #FF4757; 
-            margin-top: 15px;
-            font-size: 0.9rem;
-            font-weight: bold;
+        /* Подпись под кнопкой */
+        .btn-subtitle {
+            color: #ff4757;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <div class="content-wrapper">
+
+    <div class="card">
         <h1>Приветули!</h1>
 
-        <!-- Текст мечты -->
-        <div class="dream-text">
+        <div class="text-block">
             Сейчас эта мечта кажется такой далёкой,<br>
             что я стараюсь не говорить об этом,<br>
             как будто, если не произносить, она точно никуда не денется.
@@ -147,24 +147,24 @@
             ✨ случайности не случайны ✨<br>
             💖 В руках Вселенной все наши тайны 💖        </div>
 
-        <!-- Таймер -->
-        <div class="timer-wrapper">
+        <div class="timer-block">
             <span class="timer-label">С того дня прошло:</span>
-            <span id="days-count">0</span>
-            <span class="timer-unit">дней</span>
+            <div class="timer-circle" id="days-count">0</div>
+            <div class="timer-unit">дней</div>
         </div>
 
-        <!-- Кнопка и подпись -->
         <a href="https://t.me/lemonyaamm"
- target="_blank" rel="noopener noreferrer" class="bridge-btn">
+ target="_blank" rel="noopener noreferrer" class="btn">
             Давай построим мостик вместе
         </a>
-        <p class="subtitle">Нажмите, чтобы перейти в Telegram</p>
+        <p class="btn-subtitle">Нажмите, чтобы перейти в Telegram</p>
     </div>
 
-    <!-- Скрипт таймера -->
     <script>
-        const startDate = new Date();
+        // Дата старта: 15 июня 2023 года
+        // Месяцы в JS считаются с 0, поэтому Июнь = 5
+        const startDate = new Date(2023, 5, 15); 
+
         const daysElement = document.getElementById('days-count');
 
         function updateTimer() {
@@ -183,5 +183,3 @@
 
 </body>
 </html>
-
-    <!-- Весь контент теперь внутри этого блока -->
