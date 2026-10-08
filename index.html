@@ -158,42 +158,34 @@
 }
     </style>
     <script>
-    // 1. УКАЖИ ДАТУ ЗДЕСЬ! (Это самое важное!)
-    // Формат: Год, Месяц (0-11), День
-    // Пример: 15 июня 2023 = 2023, 5, 15
-    const startDate = new Date(2026, 10, 8); 
+    // ВАЖНО: Если хочешь считать от СЕГОДНЯ (чтобы у тебя сегодня было 0 дней),
+    // 1. ДАТА ОТСЧЕТА
+    // ВАРИАНТ 1 (Личный): Если хочешь, чтобы у ТЕБЯ сегодня было 0 дней, оставь эту строку:
+    const startDate = new Date();
 
-    // 2. Находим место для цифр
+    // ВАРИАНТ 2 (Общий): Если хочешь, чтобы таймер считал от конкретной даты (например, "Мы вместе 100 дней"),
+    // Удали строчку выше (где new Date();) и раскомментируй строку ниже (убери два слеша // в начале).
+    // Впиши свою дату: Год, Месяц (0=Январь, ..., 5=Июнь), День.
+    // Пример: Мечта началась 15 июня 2023 года -> new Date(2023, 5, 15)
+    // const startDate = new Date(2023, 5, 15); 
+
+    // 2. ИЩЕМ БЛОК С ЦИФРОЙ
     const daysElement = document.getElementById('days-count');
 
-    // 3. Считаем разницу
-    const now = new Date();
-    const diffTime = now - startDate;
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    // 3. ФУНКЦИЯ ПОДСЧЕТА
+    function updateTimer() {
+        const now = new Date();
+        const diffTime = now - startDate;
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
-    // 4. Выводим результат
-    if (daysElement) {
-        daysElement.innerText = diffDays;
+        if (daysElement) {
+            daysElement.innerText = diffDays;
+        }
     }
-</script>
-    <script>
-    // 1. УКАЖИ ДАТУ ЗДЕСЬ! (Обязательно поменяй на свою!)
-    // Формат: Год, Месяц (0-11), День
-    // Пример: 15 июня 2023 = 2023, 5, 15
-    const startDate = new Date(2026, 09, 8); 
 
-    // 2. Находим место для цифр (наш красный блок)
-    const daysElement = document.getElementById('days-count');
-
-    // 3. Считаем разницу в миллисекундах, потом переводим в дни
-    const now = new Date();
-    const diffTime = now - startDate;
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-
-    // 4. Выводим результат
-    if (daysElement) {
-        daysElement.innerText = diffDays;
-    }
+    // 4. ЗАПУСК
+    updateTimer(); // Считаем сразу при открытии страницы
+    setInterval(updateTimer, 1000); // И обновляем каждую секунду
 </script>
 <body>
 
