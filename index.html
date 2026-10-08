@@ -8,10 +8,8 @@
             margin: 0;
             padding: 0;
             min-height: 100vh;
-            /* ВОТ ЗДЕСЬ ВОЗВРАЩАЕМ КОСМОС */
-            background-image: url('space.jpg'); 
-            /* Если картинки space.jpg нет, сработает этот цвет */
-            background-color: #0f172a; 
+            /* Фон: картинка space.jpg. Если её нет — будет красивый градиент */
+            background-image: url('space.jpg'), linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -22,10 +20,10 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* Тёмная карточка (как на фото) */
+        /* Тёмная карточка */
         .card {
-            background-color: rgba(30, 30, 40, 0.95); /* Почти непрозрачный тёмный фон */
-            backdrop-filter: blur(10px); /* Эффект матового стекла поверх космоса */
+            background-color: rgba(20, 20, 30, 0.95);
+            backdrop-filter: blur(10px); /* Эффект матового стекла */
             width: 100%;
             max-width: 500px;
             padding: 40px;
@@ -33,7 +31,7 @@
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             text-align: center;
             color: #dcdcdc;
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         h1 {
@@ -56,7 +54,7 @@
             color: #ffffff;
         }
 
-        /* Блок с таймером */
+        /* Блок таймера */
         .timer-block {
             margin: 40px 0;
         }
@@ -70,7 +68,7 @@
             display: block;
         }
 
-        /* Красный круг для цифры */
+        /* Красный круг */
         .timer-circle {
             width: 120px;
             height: 120px;
@@ -161,9 +159,9 @@
     </div>
 
     <script>
-        // Дата старта: 15 июня 2023 года
-        // Месяцы в JS считаются с 0, поэтому Июнь = 5
-        const startDate = new Date(2023, 5, 15); 
+        // ВАЖНО: Здесь стоит new Date(), значит отсчёт идёт от СЕГОДНЯ.
+        // Будет показывать 0 дней.
+        const startDate = new Date(); 
 
         const daysElement = document.getElementById('days-count');
 
