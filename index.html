@@ -176,9 +176,24 @@
         daysElement.innerText = diffDays;
     }
 </script>
-</head>
-    updateTimer(); // Запускаем один раз сразу
-    // setInterval(updateTimer, 86400000); // Раскомментируй, если нужно обновлять раз в сутки (но для теста лучше не надо)
+    <script>
+    // 1. УКАЖИ ДАТУ ЗДЕСЬ! (Обязательно поменяй на свою!)
+    // Формат: Год, Месяц (0-11), День
+    // Пример: 15 июня 2023 = 2023, 5, 15
+    const startDate = new Date(2026, 09, 8); 
+
+    // 2. Находим место для цифр (наш красный блок)
+    const daysElement = document.getElementById('days-count');
+
+    // 3. Считаем разницу в миллисекундах, потом переводим в дни
+    const now = new Date();
+    const diffTime = now - startDate;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+    // 4. Выводим результат
+    if (daysElement) {
+        daysElement.innerText = diffDays;
+    }
 </script>
 <body>
 
