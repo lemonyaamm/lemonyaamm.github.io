@@ -10,14 +10,23 @@
             padding: 0;
             min-height: 100vh;
             
-            /* --- НАСТРОЙКИ ФОНА --- */
+            /* --- ИСПРАВЛЕННЫЙ ФОН --- */
+            /* 1. Сначала заливаем красивый градиент (чтобы не было чёрных дыр) */
+            background: linear-gradient(135deg, #1e1b4b 0%, #0f202a 100%);
+            
+            /* 2. Ставим картинку ПОВЕРХ градиента */
             background-image: url('space.jpg'); 
-            background-size: cover;
+            
+            /* 3. ГЛАВНОЕ ИСПРАВЛЕНИЕ: contain вместо cover */
+            /* Картинка теперь впишется целиком и не будет сплющена */
+            background-size: contain; 
+            
             background-position: center;
+            background-repeat: no-repeat; /* Чтобы картинка не тиражировалась */
             background-attachment: fixed;
             
-            /* Полупрозрачная тёмная подложка, чтобы текст читался на любом фоне */
-            background-color: rgba(0, 0, 0, 0.7);
+            /* Полупрозрачный тёмный слой поверх картинки, чтобы текст читался */
+            background-color: rgba(0, 0, 0, 0.6);
             
             color: #f0f0f0;
             display: flex;
@@ -32,18 +41,21 @@
             text-align: center;
             margin-bottom: 20px;
             font-size: 2.5rem;
+            z-index: 2;
+            position: relative;
         }
 
-        /* Контейнер для кнопки */
         .bridge-container {
             text-align: center;
+            z-index: 2;
+            position: relative;
         }
 
-        /* --- СТИЛИ КНОПКИ-МОСТИКА --- */
+        /* --- СТИЛИ КНОПКИ --- */
         .bridge-btn {
             display: inline-block;
             background-color: transparent;
-            color: #4fc3f7; /* Цвет как в Telegram */
+            color: #4fc3f7;
             border: 2px solid #4fc3f7;
             padding: 15px 40px;
             font-size: 1.2rem;
@@ -56,9 +68,9 @@
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             box-shadow: 0 0 15px rgba(79, 195, 247, 0.2);
+            z-index: 2;
         }
 
-        /* Эффект при наведении */
         .bridge-btn:hover {
             background-color: #4fc3f7;
             color: #000;
@@ -66,7 +78,6 @@
             box-shadow: 0 0 30px rgba(79, 195, 247, 0.8);
         }
 
-        /* Анимация линии под текстом */
         .bridge-btn::after {
             content: '';
             position: absolute;
@@ -82,15 +93,19 @@
             width: 100%;
         }
 
-        /* Эффект при нажатии */
         .bridge-btn:active {
             transform: translateY(-1px);
         }
 
+        /* --- НОВЫЙ ЦВЕТ ПОДПИСИ --- */
         .subtitle {
-            color: #aaa;
+            color: #ff4757; /* Ярко-красный цвет */
             margin-top: 15px;
             font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 2;
         }
     </style>
 </head>
@@ -99,7 +114,6 @@
     <h1>Приветули!</h1>
 
     <div class="bridge-container">
-        <!-- Ссылка, стилизованная под кнопку -->
         <a href="https://t.me/lemonyaamm"
  target="_blank" rel="noopener noreferrer" class="bridge-btn">
             Давай построим мостик вместе
