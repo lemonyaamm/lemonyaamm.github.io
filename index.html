@@ -128,60 +128,55 @@
     color: #ffffff;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
-    </style>
-    /* --- СТИЛИ ДЛЯ ТАЙМЕРА --- */
-.dream-timer {
+        /* --- СТИЛИ ДЛЯ ТАЙМЕРА --- */
+.timer-wrapper {
     text-align: center;
-    margin-top: 30px; /* Отступ сверху, чтобы не прилипал к стикеру */
+    margin-top: 25px;
     color: #fff;
-    font-family: sans-serif;
-    opacity: 0.8; /* Легкая прозрачность, чтобы вписывалось в стиль */
-    backdrop-filter: blur(5px); /* Эффект матового стекла для самого таймера */
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    opacity: 0.9;
+    backdrop-filter: blur(10px);
 }
-
 .timer-label {
-    font-size: 0.9rem;
-    margin-bottom: 5px;
+    font-size: 0.8rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    font-family: sans-serif;
 }
-
-.timer-value {
-    font-size: 2.5rem; /* Крупные цифры */
-    font-weight: bold;
-    color: #ff4757; /* Цвет как у твоей подписи (ярко-красный) */
+#days-count {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #ff4757; /* Твой фирменный красный цвет */
+    display: block;
     margin: 0;
     line-height: 1;
 }
-
 .timer-unit {
     font-size: 0.9rem;
+    color: #ccc;
     margin-top: 5px;
 }
-</head>
+    </style>
     <script>
-    // --- НАСТРОЙКИ ТАЙМЕРА ---
-    // УКАЖИ ДАТУ ЗДЕСЬ: (Год, Месяц-1, День)
-    // Например, если дата 15 июня 2023, пишем: 2023, 5, 15 (потому что в JS месяцы с 0)
+    // 1. УКАЖИ ДАТУ ЗДЕСЬ! (Это самое важное!)
+    // Формат: Год, Месяц (0-11), День
+    // Пример: 15 июня 2023 = 2023, 5, 15
     const startDate = new Date(2026, 10, 8); 
-    
-    const daysCount = document.getElementById('days-count');
-    
-    function updateTimer() {
-        const now = new Date();
-        // Считаем разницу в миллисекундах
-        const diffTime = Math.abs(now - startDate);
-        // Переводим в дни (1000 мс * 60 сек * 60 мин * 24 часа)
-        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-        
-        // Вставляем число в HTML
-        daysCount.innerText = diffDays;
+
+    // 2. Находим место для цифр
+    const daysElement = document.getElementById('days-count');
+
+    // 3. Считаем разницу
+    const now = new Date();
+    const diffTime = now - startDate;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+    // 4. Выводим результат
+    if (daysElement) {
+        daysElement.innerText = diffDays;
     }
-    
+</script>
+</head>
     updateTimer(); // Запускаем один раз сразу
     // setInterval(updateTimer, 86400000); // Раскомментируй, если нужно обновлять раз в сутки (но для теста лучше не надо)
 </script>
@@ -202,13 +197,13 @@
             ✨ случайности не случайны ✨<br>
             ♥️ В руках Вселенной все наши тайны ♥️        </p>
     </div>
-    <!-- НАЧАЛО ВИДЖЕТА ТАЙМЕРА -->
-<div class="dream-timer">
-    <p class="timer-label">С того дня прошло:</p>
-    <div class="timer-value" id="days-count">0</div>
-    <p class="timer-unit">дней</p>
+    <!-- НАЧАЛО ТАЙМЕРА -->
+<div class="timer-wrapper">
+    <span class="timer-label">С того дня прошло</span>
+    <span id="days-count">0</span>
+    <span class="timer-unit">дней</span>
 </div>
-<!-- КОНЕЦ ВИДЖЕТА ТАЙМЕРА -->
+<!-- КОНЕЦ ТАЙМЕРА -->
     <div class="bridge-container">
         <a href="https://t.me/lemonyaamm"
  target="_blank" rel="noopener noreferrer" class="bridge-btn">
@@ -216,6 +211,5 @@
         </a>
         <p class="subtitle">Нажми, чтобы перейти в Telegram</p>
     </div>
-
 </body>
 </html>
