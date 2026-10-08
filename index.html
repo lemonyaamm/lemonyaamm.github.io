@@ -129,7 +129,62 @@
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
     </style>
+    /* --- СТИЛИ ДЛЯ ТАЙМЕРА --- */
+.dream-timer {
+    text-align: center;
+    margin-top: 30px; /* Отступ сверху, чтобы не прилипал к стикеру */
+    color: #fff;
+    font-family: sans-serif;
+    opacity: 0.8; /* Легкая прозрачность, чтобы вписывалось в стиль */
+    backdrop-filter: blur(5px); /* Эффект матового стекла для самого таймера */
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timer-label {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.timer-value {
+    font-size: 2.5rem; /* Крупные цифры */
+    font-weight: bold;
+    color: #ff4757; /* Цвет как у твоей подписи (ярко-красный) */
+    margin: 0;
+    line-height: 1;
+}
+
+.timer-unit {
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
 </head>
+    <script>
+    // --- НАСТРОЙКИ ТАЙМЕРА ---
+    // УКАЖИ ДАТУ ЗДЕСЬ: (Год, Месяц-1, День)
+    // Например, если дата 15 июня 2023, пишем: 2023, 5, 15 (потому что в JS месяцы с 0)
+    const startDate = new Date(2026, 10, 8); 
+    
+    const daysCount = document.getElementById('days-count');
+    
+    function updateTimer() {
+        const now = new Date();
+        // Считаем разницу в миллисекундах
+        const diffTime = Math.abs(now - startDate);
+        // Переводим в дни (1000 мс * 60 сек * 60 мин * 24 часа)
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        
+        // Вставляем число в HTML
+        daysCount.innerText = diffDays;
+    }
+    
+    updateTimer(); // Запускаем один раз сразу
+    // setInterval(updateTimer, 86400000); // Раскомментируй, если нужно обновлять раз в сутки (но для теста лучше не надо)
+</script>
 <body>
 
     <h1>Приветули!</h1>
@@ -147,6 +202,13 @@
             ✨ случайности не случайны ✨<br>
             ♥️ В руках Вселенной все наши тайны ♥️        </p>
     </div>
+    <!-- НАЧАЛО ВИДЖЕТА ТАЙМЕРА -->
+<div class="dream-timer">
+    <p class="timer-label">С того дня прошло:</p>
+    <div class="timer-value" id="days-count">0</div>
+    <p class="timer-unit">дней</p>
+</div>
+<!-- КОНЕЦ ВИДЖЕТА ТАЙМЕРА -->
     <div class="bridge-container">
         <a href="https://t.me/lemonyaamm"
  target="_blank" rel="noopener noreferrer" class="bridge-btn">
