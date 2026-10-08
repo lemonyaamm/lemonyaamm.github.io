@@ -1,222 +1,165 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="utf-8">
-    <title>Мой космический мостик</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Моя мечта</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
             margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            
-            /* --- ИСПРАВЛЕННЫЙ ФОН --- */
-            /* 1. Сначала заливаем красивый градиент (чтобы не было чёрных дыр) */
-            background: linear-gradient(135deg, #1e1b4b 0%, #0f202a 100%);
-            
-            /* 2. Ставим картинку ПОВЕРХ градиента */
-            background-image: url('space.jpg'); 
-            
-            /* 3. ГЛАВНОЕ ИСПРАВЛЕНИЕ: contain вместо cover */
-            /* Картинка теперь впишется целиком и не будет сплющена */
-            background-size: contain; 
-            
-            background-position: center;
-            background-repeat: no-repeat; /* Чтобы картинка не тиражировалась */
-            background-attachment: fixed;
-            
-            /* Полупрозрачный тёмный слой поверх картинки, чтобы текст читался */
-            background-color: rgba(0, 0, 0, 0.6);
-            
-            color: #f0f0f0;
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
         }
 
         h1 {
-            color: #ffffff;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 2.5rem;
-            z-index: 2;
-            position: relative;
+            color: #333;
+            margin-bottom: 10px;
         }
 
+        /* Стили для наклейки с текстом мечты */
+        .sticker {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 500px;
+            text-align: center;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 40px;
+        }
+
+        .sticker p {
+            margin: 0;
+        }
+
+        /* Стили для таймера */
+        .timer-wrapper {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .timer-label {
+            font-size: 1.2rem;
+            color: #555;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        #days-count {
+            font-size: 3.5rem; /* Размер цифры */
+            font-weight: 700;
+            color: #FF4757;   /* Твой фирменный красный цвет */
+            display: block;
+            line-height: 1;
+            margin: 10px 0;
+        }
+
+        .timer-unit {
+            font-size: 1.2rem;
+            color: #555;
+            display: block;
+        }
+
+        /* Стили для кнопки-мостика */
         .bridge-container {
             text-align: center;
-            z-index: 2;
-            position: relative;
         }
 
-        /* --- СТИЛИ КНОПКИ --- */
         .bridge-btn {
-            display: inline-block;
-            background-color: transparent;
-            color: #4fc3f7;
-            border: 2px solid #4fc3f7;
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            background-color: #FF4757;
+            color: white;
+            padding: 15px 30px;
             text-decoration: none;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-            box-shadow: 0 0 15px rgba(79, 195, 247, 0.2);
-            z-index: 2;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: background 0.3s;
+            display: inline-block;
         }
 
         .bridge-btn:hover {
-            background-color: #4fc3f7;
-            color: #000;
-            transform: translateY(-5px);
-            box-shadow: 0 0 30px rgba(79, 195, 247, 0.8);
+            background-color: #d63031;
         }
 
-        .bridge-btn::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background-color: #4fc3f7;
-            transition: width 0.4s ease;
-        }
-
-        .bridge-btn:hover::after {
-            width: 100%;
-        }
-
-        .bridge-btn:active {
-            transform: translateY(-1px);
-        }
-
-        /* --- НОВЫЙ ЦВЕТ ПОДПИСИ --- */
         .subtitle {
-            color: #ff4757; /* Ярко-красный цвет */
             margin-top: 15px;
+            color: #888;
             font-size: 0.9rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            z-index: 2;
         }
-        .sticker {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 25px 30px;
-    border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    max-width: 500px;
-    text-align: center;
-    margin: 0 auto 30px; /* Центрирует стикер и добавляет отступ снизу */
-    position: relative;
-    z-index: 3;
-}
-.sticker p {
-    margin: 0;
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #ffffff;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-}
-        /* --- СТИЛИ ДЛЯ ТАЙМЕРА --- */
-.timer-wrapper {
-    text-align: center;
-    margin-top: 25px;
-    color: #fff;
-    opacity: 0.9;
-    backdrop-filter: blur(10px);
-}
-.timer-label {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 5px;
-    font-family: sans-serif;
-}
-#days-count {
-    font-size: 2.8rem;
-    font-weight: 700;
-    color: #ff4757; /* Твой фирменный красный цвет */
-    display: block;
-    margin: 0;
-    line-height: 1;
-}
-.timer-unit {
-    font-size: 0.9rem;
-    color: #ccc;
-    margin-top: 5px;
-}
     </style>
-    <script>
-    // ВАЖНО: Если хочешь считать от СЕГОДНЯ (чтобы у тебя сегодня было 0 дней),
-    // 1. ДАТА ОТСЧЕТА
-    // ВАРИАНТ 1 (Личный): Если хочешь, чтобы у ТЕБЯ сегодня было 0 дней, оставь эту строку:
-    const startDate = new Date();
-
-    // ВАРИАНТ 2 (Общий): Если хочешь, чтобы таймер считал от конкретной даты (например, "Мы вместе 100 дней"),
-    // Удали строчку выше (где new Date();) и раскомментируй строку ниже (убери два слеша // в начале).
-    // Впиши свою дату: Год, Месяц (0=Январь, ..., 5=Июнь), День.
-    // Пример: Мечта началась 15 июня 2023 года -> new Date(2023, 5, 15)
-    // const startDate = new Date(2023, 5, 15); 
-
-    // 2. ИЩЕМ БЛОК С ЦИФРОЙ
-    const daysElement = document.getElementById('days-count');
-
-    // 3. ФУНКЦИЯ ПОДСЧЕТА
-    function updateTimer() {
-        const now = new Date();
-        const diffTime = now - startDate;
-        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-
-        if (daysElement) {
-            daysElement.innerText = diffDays;
-        }
-    }
-
-    // 4. ЗАПУСК
-    updateTimer(); // Считаем сразу при открытии страницы
-    setInterval(updateTimer, 1000); // И обновляем каждую секунду
-</script>
+</head>
 <body>
 
     <h1>Приветули!</h1>
-     <div class="sticker">
-        <p>
-            Сейчас эта мечта кажется такой далёкой,<br>
-            что я стараюсь не говорить об этом
-            как будто, если не произносить, она точно никуда не денется.<br><br>
-            
-            Шли годы, я привыкала к «потом»,
-            училась не торопить события.<br>
-            Но в глубине души всё равно живет это тихое:<br>
-            «Всё равно когда-нибудь сбудется»<br><br>
 
-            ✨ случайности не случайны ✨<br>
-            ♥️ В руках Вселенной все наши тайны ♥️        </p>
+    <!-- Блок с твоим текстом мечты -->
+    <div class="sticker">
+        <p>Сейчас эта мечта кажется такой далёкой,<br>
+        что я стараюсь не говорить об этом<br>
+        как будто, если не произносить, она точно никуда не денется.</p>
+        <br>
+        <p>Шли годы, я привыкала к «потом»,<br>
+        училась не торопить события.</p>
+        <br>
+        <p>Но в глубине души всё равно живет это тихое:<br>
+        «Всё равно когда-нибудь сбудется»</p>
+        <br>
+        <p>✨ случайности не случайны ✨<br>
+        💖 В руках Вселенной все наши тайны 💖</p>
     </div>
-    <!-- НАЧАЛО ТАЙМЕРА -->
-<div class="timer-wrapper">
-    <span class="timer-label">С того дня прошло</span>
-    <span id="days-count">0</span>
-    <span class="timer-unit">дней</span>
-</div>
-<!-- КОНЕЦ ТАЙМЕРА -->
+
+    <!-- ТАЙМЕР: Считает дни от СЕГОДНЯШНЕГО дня -->
+    <div class="timer-wrapper">
+        <span class="timer-label">С того дня прошло:</span>
+        <!-- Цифра будет появляться здесь автоматически -->
+        <span id="days-count">0</span>
+        <span class="timer-unit">дней</span>
+    </div>
+
+    <!-- Кнопка перехода в Телеграм -->
     <div class="bridge-container">
         <a href="https://t.me/lemonyaamm"
  target="_blank" rel="noopener noreferrer" class="bridge-btn">
             Давай построим мостик вместе
         </a>
-        <p class="subtitle">Нажми, чтобы перейти в Telegram</p>
+        <p class="subtitle">Нажмите, чтобы перейти в Telegram</p>
     </div>
+
+    <!-- Скрипт таймера (работает сам, ничего менять не надо) -->
+    <script>
+        // 1. ДАТА ОТСЧЕТА: СЕГОДНЯ
+        // new Date() берет текущую дату и время прямо сейчас
+        const startDate = new Date();
+
+        // 2. ИЩЕМ БЛОК С ЦИФРОЙ
+        // Мы ищем элемент с id="days-count", который создали в HTML выше
+        const daysElement = document.getElementById('days-count');
+
+        // 3. ФУНКЦИЯ ПОДСЧЕТА
+        function updateTimer() {
+            const now = new Date();
+            // Вычисляем разницу в миллисекундах
+            const diffTime = now - startDate;
+            
+            // Переводим миллисекунды в полные дни
+            // (1000 мс * 60 сек * 60 мин * 24 часа)
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+            // Если нашли блок на странице, пишем туда число
+            if (daysElement) {
+                daysElement.innerText = diffDays;
+            }
+        }
+
+        // 4. ЗАПУСК
+        updateTimer(); // Считаем сразу при загрузке страницы
+        setInterval(updateTimer, 1000); // Обновляем каждую секунду
+    </script>
+
 </body>
 </html>
