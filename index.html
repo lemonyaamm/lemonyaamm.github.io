@@ -15,21 +15,72 @@
         background-size: cover;       /* Картинка заполнит весь экран, не искажаясь */
         background-position: center;  /* Центрирует картинку */
         background-attachment: fixed;  /* Картинка стоит на месте при прокрутке */
-        /* -------------------------------- */
+        
+ /* Полупрозрачный тёмный слой поверх картинки, чтобы текст читался всегда */
+            background-color: rgba(0, 0, 0, 0.6); 
 
         color: #f0f0f0; /* Светло‑серый текст — он лучше читается на пёстром фоне, чем чисто белый */
+         min-height: 100vh;
       }
-      h1 { color: #ffffff; 
-        text-shadow: 0 2px 4px rgba(0,0,0,0.8); /* Тень для заголовка */
- }
-      p { text-shadow: 0 2px 4px rgba(0,0,0,0.8); /* Тень для обычного текста */
- }
-      a { color: #4fc3f7; 
-        text-decoration: none; 
- }
-      a:hover { text-decoration: underline; 
-               color: #81d4fa;
-              }
+    h1 { 
+            color: #ffffff; 
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8); 
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        /* Контейнер для центрирования */
+        .bridge-container {
+            text-align: center;
+            margin: 50px 0;
+        }
+        /* Стили кнопки-мостика */
+        .bridge-btn {
+            display: inline-block;
+            background: transparent;
+            color: #4fc3f7; /* Цвет Telegram */
+            border: 2px solid #4fc3f7;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase; /* Все буквы заглавные */
+            letter-spacing: 2px; /* Расстояние между буквами */
+            text-decoration: none; /* Убираем подчёркивание у ссылки */
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); /* Плавная анимация */
+            box-shadow: 0 0 10px rgba(79, 195, 247, 0.3); /* Лёгкое свечение */
+        }
+        /* Эффект при наведении */
+        .bridge-btn:hover {
+            background-color: #4fc3f7;
+            color: #000; /* Текст становится чёрным на голубом фоне */
+            transform: translateY(-5px); /* Кнопка всплывает вверх */
+            box-shadow: 0 0 25px rgba(79, 195, 247, 0.8); /* Яркое свечение */
+        }
+        /* Эффект при нажатии (когда держишь кнопку мышкой) */
+        .bridge-btn:active {
+            transform: translateY(-1px);
+        }
+        /* Декоративная линия снизу (выезжает при наведении) */
+        .bridge-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #4fc3f7;
+            transition: width 0.4s ease;
+        }
+        .bridge-btn:hover::after {
+            width: 100%;
+        }
+        .subtitle {
+            color: #ccc;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
     </style>
   </head>
   <body>
