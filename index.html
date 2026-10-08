@@ -10,22 +10,13 @@
             padding: 0;
             min-height: 100vh;
             
-            /* --- ИСПРАВЛЕННЫЙ ФОН --- */
-            /* 1. Сначала заливаем красивый градиент (чтобы не было чёрных дыр) */
+            /* --- ФОН --- */
             background: linear-gradient(135deg, #1e1b4b 0%, #0f202a 100%);
-            
-            /* 2. Ставим картинку ПОВЕРХ градиента */
             background-image: url('space.jpg'); 
-            
-            /* 3. ГЛАВНОЕ ИСПРАВЛЕНИЕ: contain вместо cover */
-            /* Картинка теперь впишется целиком и не будет сплющена */
             background-size: contain; 
-            
             background-position: center;
-            background-repeat: no-repeat; /* Чтобы картинка не тиражировалась */
+            background-repeat: no-repeat;
             background-attachment: fixed;
-            
-            /* Полупрозрачный тёмный слой поверх картинки, чтобы текст читался */
             background-color: rgba(0, 0, 0, 0.6);
             
             color: #f0f0f0;
@@ -34,20 +25,43 @@
             justify-content: center;
             align-items: center;
         }
-
         h1 {
             color: #ffffff;
             text-shadow: 0 2px 10px rgba(0,0,0,0.8);
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             font-size: 2.5rem;
-            z-index: 2;
+            z-index: 3;
             position: relative;
+        }
+        /* --- СТИКЕР (НОВЫЙ БЛОК) --- */
+        .sticker {
+            background: rgba(255, 255, 255, 0.15); /* Полупрозрачный белый */
+            backdrop-filter: blur(10px); /* Эффект размытия фона под стикером (как матовое стекло) */
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Тонкая белая рамка */
+            padding: 20px 30px;
+            border-radius: 20px; /* Сильное скругление */
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); /* Тень, чтобы отделить от фона */
+            max-width: 500px; /* Чтобы на мобильных не был слишком широким */
+            text-align: center;
+            margin-bottom: 30px;
+            z-index: 3;
+            position: relative;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px); /* Для Safari */
+        }
+
+        .sticker p {
+            margin: 0;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            color: #fff;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
         }
 
         .bridge-container {
             text-align: center;
-            z-index: 2;
+            z-index: 3;
             position: relative;
         }
 
@@ -68,7 +82,6 @@
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             box-shadow: 0 0 15px rgba(79, 195, 247, 0.2);
-            z-index: 2;
         }
 
         .bridge-btn:hover {
@@ -95,31 +108,3 @@
 
         .bridge-btn:active {
             transform: translateY(-1px);
-        }
-
-        /* --- НОВЫЙ ЦВЕТ ПОДПИСИ --- */
-        .subtitle {
-            color: #ff4757; /* Ярко-красный цвет */
-            margin-top: 15px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            z-index: 2;
-        }
-    </style>
-</head>
-<body>
-
-    <h1>Приветули!</h1>
-
-    <div class="bridge-container">
-        <a href="https://t.me/lemonyaamm"
- target="_blank" rel="noopener noreferrer" class="bridge-btn">
-            Давай построим мостик вместе
-        </a>
-        <p class="subtitle">Нажми, чтобы перейти в Telegram</p>
-    </div>
-
-</body>
-</html>
