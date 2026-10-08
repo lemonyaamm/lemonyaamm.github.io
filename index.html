@@ -10,98 +10,88 @@
             padding: 0;
             min-height: 100vh;
             
-            /* Фон: градиент + картинка */
-            background: linear-gradient(135deg, #1e1b4b 0%, #0f202a 100%);
+            /* 1. Фон: только картинка, БЕЗ затемнения фона */
             background-image: url('space.jpg'); 
-            background-size: contain; 
+            background-size: cover; /* Картинка заполнит весь экран */
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
             
-            /* Затемнение, чтобы текст читался */
-            background-color: rgba(0, 0, 0, 0.7);
-            
-            color: #f0f0f0;
+            color: #fff;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
         }
 
+        /* 2. ГЛАВНОЕ ИСПРАВЛЕНИЕ: Контейнер-подложка */
+        /* Это тот самый "матовый" блок, который спасёт текст от прозрачности */
+        .content-wrapper {
+            background: rgba(20, 20, 30, 0.85); /* Тёмно-серая полупрозрачная подложка */
+            backdrop-filter: blur(10px); /* Эффект матового стекла */
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
         h1 {
             color: #ffffff;
             text-shadow: 0 2px 10px rgba(0,0,0,0.8);
-            text-align: center;
             margin-bottom: 20px;
             font-size: 2.5rem;
-            z-index: 2;
-            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 3px;
         }
 
-        /* Стили для "стикера" с текстом мечты */
-        .sticker {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 25px 30px;
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            max-width: 500px;
-            text-align: center;
-            margin: 0 auto 30px;
-            position: relative;
-            z-index: 3;
-        }
-
-        .sticker p {
-            margin: 0;
+        /* Текст мечты: теперь он жирный и контрастный */
+        .dream-text {
+            color: #e0e0e0;
             font-size: 1.1rem;
             line-height: 1.6;
-            color: #ffffff;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.7);
         }
 
-        /* Стили для таймера */
+        .dream-text strong {
+            color: #fff; /* Акценты делаем белыми */
+            font-weight: 700;
+        }
+
+        /* Таймер: крупный, яркий, красный */
         .timer-wrapper {
             text-align: center;
-            margin-bottom: 40px;
-            z-index: 3;
-            position: relative;
+            margin: 30px 0;
         }
 
         .timer-label {
             font-size: 1.2rem;
-            color: #fff;
-            display: block;
+            color: #aaa;
             margin-bottom: 10px;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         #days-count {
-            font-size: 4rem; /* Огромная цифра */
-            font-weight: 700;
-            color: #FF4757;   /* Твой фирменный красный цвет */
+            font-size: 5rem; /* Огромная цифра */
+            font-weight: 800;
+            color: #FF4757; /* Твой фирменный красный */
             display: block;
             line-height: 1;
-            margin: 10px 0;
-            text-shadow: 0 0 20px rgba(255, 71, 87, 0.6);
+            text-shadow: 0 0 20px rgba(255, 71, 87, 0.8);
+            margin: 0;
         }
 
         .timer-unit {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             color: #fff;
-            display: block;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+            font-weight: 300;
         }
 
-        /* Стили для кнопки-мостика (Космический стиль) */
-        .bridge-container {
-            text-align: center;
-            z-index: 3;
-            position: relative;
-        }
-
+        /* Кнопка: стиль "космический мостик" */
         .bridge-btn {
             display: inline-block;
             background-color: transparent;
@@ -118,7 +108,6 @@
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             box-shadow: 0 0 15px rgba(79, 195, 247, 0.2);
-            z-index: 3;
         }
 
         .bridge-btn:hover {
@@ -128,66 +117,44 @@
             box-shadow: 0 0 30px rgba(79, 195, 247, 0.8);
         }
 
-        .bridge-btn::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 3px;background-color: #4fc3f7;
-            transition: width 0.4s ease;
-        }
-
-        .bridge-btn:hover::after {
-            width: 100%;
-        }
-
-        .bridge-btn:active {
-            transform: translateY(-1px);
-        }
-
-        /* Подпись под кнопкой */
+        /* Фраза под кнопкой: теперь она ЯРКО-КРАСНАЯ, как ты хотела */
         .subtitle {
-            color: #ff4757;
+            color: #FF4757; 
             margin-top: 15px;
             font-size: 0.9rem;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1px;
-            z-index: 3;
         }
     </style>
 </head>
 <body>
+    <div class="content-wrapper">
+        <h1>Приветули!</h1>
 
-    <h1>Приветули!</h1>
+        <!-- Текст мечты -->
+        <div class="dream-text">
+            Сейчас эта мечта кажется такой далёкой,<br>
+            что я стараюсь не говорить об этом,<br>
+            как будто, если не произносить, она точно никуда не денется.
+            <br><br>
+            Шли годы, я привыкала к «потом»,<br>
+            училась не торопить события.
+            <br><br>
+            Но в глубине души всё равно живет это тихое:<br>
+            <strong>«Всё равно когда-нибудь сбудется»</strong>
+            <br><br>
+            ✨ случайности не случайны ✨<br>
+            💖 В руках Вселенной все наши тайны 💖        </div>
 
-    <!-- Блок с твоим текстом мечты -->
-    <div class="sticker">
-        <p>Сейчас эта мечта кажется такой далёкой,<br>
-        что я стараюсь не говорить об этом<br>
-        как будто, если не произносить, она точно никуда не денется.</p>
-        <br>
-        <p>Шли годы, я привыкала к «потом»,<br>
-        училась не торопить события.</p>
-        <br>
-        <p>Но в глубине души всё равно живет это тихое:<br>
-        «Всё равно когда-нибудь сбудется»</p>
-        <br>
-        <p>✨ случайности не случайны ✨<br>
-        💖 В руках Вселенной все наши тайны 💖</p>
-    </div>
+        <!-- Таймер -->
+        <div class="timer-wrapper">
+            <span class="timer-label">С того дня прошло:</span>
+            <span id="days-count">0</span>
+            <span class="timer-unit">дней</span>
+        </div>
 
-    <!-- ТАЙМЕР: Считает дни от СЕГОДНЯШНЕГО дня -->
-    <div class="timer-wrapper">
-        <span class="timer-label">С того дня прошло:</span>
-        <!-- Цифра будет появляться здесь автоматически -->
-        <span id="days-count">0</span>
-        <span class="timer-unit">дней</span>
-    </div>
-
-    <!-- Кнопка перехода в Телеграм -->
-    <div class="bridge-container">
+        <!-- Кнопка и подпись -->
         <a href="https://t.me/lemonyaamm"
  target="_blank" rel="noopener noreferrer" class="bridge-btn">
             Давай построим мостик вместе
@@ -197,18 +164,12 @@
 
     <!-- Скрипт таймера -->
     <script>
-        // 1. ДАТА ОТСЧЕТА: СЕГОДНЯ
         const startDate = new Date();
-
-        // 2. ИЩЕМ БЛОК С ЦИФРОЙ
         const daysElement = document.getElementById('days-count');
 
-        // 3. ФУНКЦИЯ ПОДСЧЕТА
         function updateTimer() {
             const now = new Date();
             const diffTime = now - startDate;
-            
-            // Переводим миллисекунды в полные дни
             const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
             if (daysElement) {
@@ -216,10 +177,11 @@
             }
         }
 
-        // 4. ЗАПУСК
-        updateTimer(); 
-        setInterval(updateTimer, 1000); 
+        updateTimer();
+        setInterval(updateTimer, 1000);
     </script>
 
 </body>
 </html>
+
+    <!-- Весь контент теперь внутри этого блока -->
